@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -15,7 +15,8 @@ app.add_middleware(
 
 
 @app.post("/echo")
-async def echo(data):
+async def echo(request: Request):
+    data = await request.json()
     return {"received": f"{data}"}
 
 
